@@ -1,0 +1,61 @@
+﻿@model IEnumerable<Encrypt_Decrypt_Client.Models.TextDetails>
+
+@{
+    ViewBag.Title = "ShowAll";
+}
+
+<h2>ShowAll</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Index")
+</p>
+@{
+    string message = TempData["Message"] as string;
+    string message2 = TempData["DeleteMessage"] as string;
+    if (!String.IsNullOrEmpty(message))
+    {
+        <div class="container">
+            <p style="font-weight:bolder;color:green">@message</p>
+        </div>
+    }
+    if (!String.IsNullOrEmpty(message2))
+    {
+        <div class="container">
+            <p style="font-weight:bolder;color:green">@message2</p>
+        </div>
+    }
+}
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.plaintext)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.encryptedtext)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.decryptedtext)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.plaintext)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.encryptedtext)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.decryptedtext)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.id }, new { onclick = "return confirm('Are you sure to Delete?')" })
+            </td>
+        </tr>
+    }
+
+</table>
